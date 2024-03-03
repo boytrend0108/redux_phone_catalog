@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -6,11 +5,9 @@ import './Header.scss';
 import { Navbar } from '../Navbar';
 import { MyLogo } from '../UI/MyLogo';
 import { MySearch } from '../UI/MySearch';
-import { StateContext } from '../../store/State';
 import { CategoryName } from '../../types/product';
 
 export const Header = () => {
-  const { favoriteProducts, cart } = useContext(StateContext);
   const numberOfFavorite = favoriteProducts.length;
   const productsInCart = cart.length;
   const { pathname } = useLocation();

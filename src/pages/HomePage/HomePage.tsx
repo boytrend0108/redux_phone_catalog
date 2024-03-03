@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 
 import './HomePage.scss';
 import { ProductSlider } from '../../components/ProductsSlider';
@@ -8,21 +8,22 @@ import { CategoryItem } from '../../components/CategoryItem';
 import { MyLoader } from '../../components/UI/MyLoader';
 
 import { categories } from '../../api/category/category';
-import { StateContext } from '../../store/State';
+
 import {
   getBrandNewProducts,
   getHotPriceProducts,
 } from '../../helpers/productsHelpers';
+import { useAppSelector } from '../../app/hooks';
 
 export const HomePage = () => {
   const [hotProducts, setHotProducts] = useState<Product[]>([]);
   const [newProducts, setNewProducts] = useState<Product[]>([]);
-  const { allProducts, loading, loadingError } = useContext(StateContext);
+  const { phones, loading, error } = useAppSelector(state => state.phones)
 
   useEffect(() => {
-    setNewProducts(getBrandNewProducts(allProducts));
-    setHotProducts(getHotPriceProducts(allProducts));
-  }, [allProducts]);
+    setNewProducts(getBrandNewProducts(phones));
+    setHotProducts(getHotPriceProducts(phones));
+  }, [phones]);
 
   return (
     <div className="homepage">
@@ -38,8 +39,8 @@ export const HomePage = () => {
           ? <MyLoader />
           : (
             <>
-              {loadingError
-                ? <h3>{loadingError}</h3>
+              {error
+                ? <h3>{error}</h3>
                 : <ProductSlider products={hotProducts} />}
             </>
           )}
@@ -64,8 +65,8 @@ export const HomePage = () => {
           ? <MyLoader />
           : (
             <>
-              {loadingError
-                ? <h3>{loadingError}</h3>
+              {error
+                ? <h3>{error}</h3>
                 : <ProductSlider products={newProducts} sliderName="new" />}
             </>
           )}

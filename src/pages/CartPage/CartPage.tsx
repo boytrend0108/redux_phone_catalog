@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import './CartPage.scss';
@@ -7,14 +7,13 @@ import { MyLoader } from '../../components/UI/MyLoader';
 import { MyButton } from '../../components/UI/MyButton';
 import { CartItem } from '../../components/CartItem';
 
-import { StateContext } from '../../store/State';
 import { getLocalStorigeData } from '../../helpers/localStorageHelper';
 import { Cart } from '../../types/cart';
 import { MyModal } from '../../components/UI/MyModal';
 import { setScrollState } from '../../helpers/pageHelper';
 
 export const CartPage = () => {
-  const { cart } = useContext(StateContext);
+  const cart = [];
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<Cart>([]);
   const [showModal, setShowModal] = useState(false);

@@ -1,11 +1,12 @@
 import { createRoot } from 'react-dom/client';
 import './styles/main.scss';
 import { Root } from './Root';
-import { GlobalProvider } from './store/State';
+import { Provider } from 'react-redux';
+import { store } from './app/store'
 
 createRoot(document.getElementById('root') as HTMLElement)
   .render(
-    <GlobalProvider>
+    <Provider store={store}>
       <Root />
-    </GlobalProvider>,
+    </Provider>,
   );

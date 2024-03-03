@@ -1,28 +1,19 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import './App.scss';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { SideMenu } from './components/SideMenu';
-import { DispatchContext } from './store/State';
-import { getAllProducts } from './api/productApi';
-import { Product } from './types/product';
 import { getLocalStorigeData } from './helpers/localStorageHelper';
+import { useAppDispatch } from './app/hooks';
+import * as phonesSlice from './features/phones/phonesSlice';
 
 export const App = () => {
-  const dispatch = useContext(DispatchContext);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getAllProducts<Product[]>()
-      .then(products => {
-        dispatch({ type: 'getAllProducts', payload: products });
-      })
-      .catch(() => dispatch({
-        type: 'setLoadingError',
-        payload: 'Something went wrong...',
-      }))
-      .finally(() => dispatch({ type: 'setLoading', payload: false }));
+    dispatch(phonesSlice.phonesInit());
 
     const favoriteProducts = getLocalStorigeData('favoriteProducts');
 

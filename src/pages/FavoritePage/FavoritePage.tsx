@@ -7,14 +7,11 @@ import { MyLoader } from '../../components/UI/MyLoader';
 
 import { Product } from '../../types/product';
 import { getPhones } from '../../api/productApi';
-import { StateContext } from '../../store/State';
 
 export const FavoritePage = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [favorite, setFavorite] = useState<Product[]>([]);
-
-  const { favoriteProducts } = useContext(StateContext);
 
   useEffect(() => {
     const data = localStorage.getItem('favoriteProducts');
@@ -38,7 +35,7 @@ export const FavoritePage = () => {
         localStorage.removeItem('favoriteProducts');
       }
     }
-  }, [favoriteProducts]);
+  }, []);
 
   return (
     <section className="favorite">
