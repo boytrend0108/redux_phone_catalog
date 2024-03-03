@@ -1,0 +1,88 @@
+@import "./utils/mixins";
+@import "./utils/extends";
+@import "./utils/variables";
+@import "./utils/normalize";
+
+.page {
+  font-family: $font-main;
+  font-size: 14px;
+  line-height: 21px;
+  color: $color_primary;
+  scroll-behavior: smooth;
+
+  @include scroll-bar;
+}
+
+.page__content {
+  margin: 0 auto;
+  min-width: 320px;
+}
+
+.container {
+  max-width: 1440px;
+  height: 100%;
+  padding-inline: 152px;
+  box-sizing: border-box;
+  margin: 0 auto;
+
+  @include on-desktop {
+    padding-inline: 120px;
+  }
+
+  @include on-desktop-s {
+    padding-inline: 60px;
+  }
+
+  @include on-tablet {
+    padding-inline: 40px;
+  }
+
+  @include on-tablet-s {
+    padding-inline: 30px;
+  }
+
+  @include on-mobile-l {
+    padding-inline: 20px;
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+h1 {
+  @extend %h1;
+}
+
+h2 {
+  @extend %h2;
+}
+
+h3 {
+  @extend %h3;
+}
+
+p {
+  @extend %p;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+}
+
+button {
+  @extend %button;
+ }

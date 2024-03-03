@@ -1,0 +1,45 @@
+@import '../../styles/utils/utils';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+
+  &__list,
+  &__button-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__button-list {
+    @include on-tablet-s {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    display: none;
+    margin-inline: 12px;
+
+    @include on-tablet-s {
+      display: block;
+    }
+  }
+
+  &__link {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $color-icons;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $color-secondary;
+    transition: all ease-in-out $transition-duration;
+    cursor: pointer;
+
+    &--active {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+}

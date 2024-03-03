@@ -1,0 +1,52 @@
+@import "../../styles/utils/utils";
+
+.cart-page {
+  padding-block: $page-padding-block;
+
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__products {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    @include on-tablet-s {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 2;
+  }
+
+  &__total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    flex-grow: 1;
+    max-width: 368px;
+    min-width: 200px;
+    height: fit-content;
+    padding: 24px;
+    box-sizing: border-box;
+    border: 1px solid $color-elements;
+
+    &-price {
+      @extend %h1;
+    }
+
+    &-quantity {
+      width: 100%;
+      text-align: center;
+      padding-bottom: 24px;
+      color: $color-secondary;
+      border-bottom: 1px solid $color-elements;
+    }
+  }
+}

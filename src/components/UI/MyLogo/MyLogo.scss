@@ -1,0 +1,17 @@
+@import '../../../styles/utils/utils';
+
+.logo {
+  width: fit-content;
+  padding-inline: 26px;
+  display: flex;
+  align-items: center;
+  transition: transform ease-in-out $transition-duration;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+
+  @include on-desktop {
+    padding-inline: 20px;
+  }
+}

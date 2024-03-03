@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useContext, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+import './App.scss';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { SideMenu } from './components/SideMenu';
+import { DispatchContext } from './store/State';
+import { getAllProducts } from './api/productApi';
+import { Product } from './types/product';
+import { getLocalStorigeData } from './helpers/localStorageHelper';
+
+export const App = () => {
+  const dispatch = useContext(DispatchContext);
+
+  useEffect(() => {
+    getAllProducts<Product[]>()
+      .then(products => {
+        dispatch({ type: 'getAllProducts', payload: products });
+      })
+      .catch(() => dispatch({
+        type: 'setLoadingError',
+        payload: 'Something went wrong...',
+      }))
+      .finally(() => dispatch({ type: 'setLoading', payload: false }));
+
+    const favoriteProducts = getLocalStorigeData('favoriteProducts');
+
+    if (!favoriteProducts) {
+      localStorage.setItem('favoriteProducts', JSON.stringify([]));
+    } else {
+      dispatch({
+        type: 'updateFavorite',
+        payload: favoriteProducts,
+      });
+    }
+
+    const cart = getLocalStorigeData('cart');
+
+    if (!cart) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    } else {
+      dispatch({
+        type: 'updateCart',
+        payload: cart,
+      });
+    }
+  }, [dispatch]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="App">
+      <Header />
+      <SideMenu />
 
-export default App
+      <main>
+        <div className="container">
+          <Outlet />
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};

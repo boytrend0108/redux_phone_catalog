@@ -1,0 +1,41 @@
+@import "../../styles/utils/utils";
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  padding-block: 24px 80px;
+
+  @include on-mobile-l {
+    gap: 20px;
+  }
+
+  &__breadcrumbs {
+    @include on-mobile-l {
+      display: none;
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include on-mobile-l {
+      gap: 20px;
+    }
+  }
+
+  &__title {
+    @extend %h1;
+
+    height: 82px;
+  }
+
+  &__main {
+    margin-bottom: 80px;
+
+    @include on-mobile-l {
+      margin-bottom: 40px;
+    }
+  }
+}

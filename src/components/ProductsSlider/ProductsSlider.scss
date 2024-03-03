@@ -1,0 +1,43 @@
+@import "../../styles/utils/utils";
+
+.products-slider {
+  &__box {
+    position: relative;
+  }
+
+  &__wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 507px;
+    margin: 0 auto;
+  }
+
+  &__carts {
+    position: absolute;
+    display: flex;
+    gap: 16px;
+    transition: transform ease-in-out $transition-duration;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 16px;
+    position: absolute;
+    top: -50px;
+    right: 0;
+
+    @include on-mobile-l {
+      top: -62px;
+    }
+
+    @include on-mobile-m {
+      top: -42px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

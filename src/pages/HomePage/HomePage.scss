@@ -1,0 +1,41 @@
+@import '../../styles/utils/utils';
+
+
+.homepage {
+  &__section {
+    margin-bottom: 80px;
+    margin-inline: auto;
+
+    @include on-tablet {
+      margin-bottom: 60px;
+    }
+
+    @include on-mobile-m {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__slider {
+    margin-top: 40px;
+  }
+
+  &__section-title {
+    @extend %h1;
+
+    margin-bottom: 24px;
+
+    @include on-mobile-m {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__categories {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+
+    @include on-mobile-l {
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import '../../styles/utils/utils';
+
+.footer {
+  grid-area: footer;
+  border-top: 1px solid $color-background;
+  box-sizing: border-box;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: $desctop-size;
+    height: 100%;
+    margin: 0 auto;
+  }
+
+  &__nav {
+    display: flex;
+
+    @include on-tablet-s {
+      display: none;
+    }
+  }
+
+  &__link {
+    @include navbar-link;
+  }
+
+  &__toplink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid $color-background;
+    margin-left: 16px;
+
+    @include hover(background-color, $color-background);
+
+    &::after {
+      content: url(../../../public/img/icons/chevron-up.svg);
+      margin-top: 5px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    color: $color-secondary;
+
+    @extend %small-text;
+  }
+}

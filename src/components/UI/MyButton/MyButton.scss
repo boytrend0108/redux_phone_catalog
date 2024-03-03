@@ -1,0 +1,30 @@
+@import "../../../styles/utils/utils";
+
+.my-button {
+  height: 40px;
+  width: 100%;
+  min-width: 114px;
+  max-width: 176px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $color-white;
+  background-color: $color-primary;
+  transition: all ease-in-out $transition-duration;
+  cursor: pointer;
+
+
+  &--selected {
+    border: 1px solid $color-elements;
+    color: $color-selected;
+    background-color: $color-white;
+  }
+
+  &:disabled {
+    opacity: 50%;
+  }
+
+  &:hover {
+    box-shadow: 0 3px 13px 0 #17203142;
+  }
+}

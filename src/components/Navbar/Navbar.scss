@@ -1,0 +1,37 @@
+@import "../../styles/utils/utils";
+
+.navbar {
+  &__main {
+    display: flex;
+
+    @include on-tablet-s {
+      display: none;
+    }
+  }
+
+  &__mobile {
+    height: 100%;
+    width: 60px;
+    display: none;
+
+    @include on-tablet-s {
+      display: block;
+    }
+
+    &::after {
+      content: url(../../../public/img/icons/burger-menu.svg);
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      top: 3px;
+    }
+
+    &:hover::after {
+      content: url(../../../public/img/icons/burger-menu-hover.svg);
+    }
+  }
+}

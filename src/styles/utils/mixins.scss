@@ -1,0 +1,87 @@
+@import './/variables';
+
+@mixin on-desktop {
+  @media (max-width: $desctop-size) {
+    @content;
+  }
+}
+
+@mixin on-desktop-s {
+  @media (max-width: $desctop-size-s) {
+    @content;
+  }
+}
+
+@mixin on-tablet {
+  @media (max-width: $tablet-size) {
+    @content;
+  }
+}
+
+@mixin on-tablet-s {
+  @media (max-width: $tablet-size-s) {
+    @content;
+  }
+}
+
+@mixin on-mobile-l {
+  @media (max-width: $mobile-size-l) {
+    @content;
+  }
+}
+
+@mixin on-mobile-m {
+  @media (max-width: $mobile-size-m) {
+    @content;
+  }
+}
+
+
+@mixin hover($_property, $_toValue) {
+  transition: #{$_property} $transition-duration;
+  cursor: pointer;
+
+  &:hover {
+    #{$_property}: $_toValue;
+  }
+}
+
+@mixin navbar-link {
+  --padding-inline: 32px;
+
+  @include on-tablet {
+  --padding-inline: 12px;
+  }
+
+  padding-inline: var(--padding-inline);
+  padding-block: 26px;
+  text-decoration: none;
+  color: $color-secondary;
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+
+  @include hover(background-color, $color-background);
+ @extend %upper-case;
+}
+
+@mixin border {
+  border: 1px solid $color-background;
+}
+
+@mixin scroll-bar {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-secondary;
+    outline: 1px solid $color-secondary;
+    border-radius: 5px;
+  }
+}
