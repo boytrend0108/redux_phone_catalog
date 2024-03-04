@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './AddToCart.scss';
-import { DispatchContext, StateContext } from '../../store/State';
 import { MyButton } from '../UI/MyButton';
 import { CartItemType } from '../../types/cart';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import * as cartSlice from '../../features/cart/cartSlice';
 
 type Props = {
   product: CartItemType;
@@ -15,8 +16,9 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
   } = product;
 
   const [favorite, setFavorite] = useState(false);
-  const { favoriteProducts, cart } = useContext(StateContext);
-  const dispatch = useContext(DispatchContext);
+  const { cart } = useAppSelector(state => state.cart);
+  const { favorites } = useAppSelector(state => state.favorites);
+  const dispatch = useAppDispatch();
 
   const isSelected = cart.some(el => el.itemId === itemId);
 
@@ -29,22 +31,18 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
   }
 
   function handleAddToCart() {
-    if (isSelected) {
-      const updatedCart = cart.filter(el => el.itemId !== itemId);
-
-      dispatch({ type: 'updateCart', payload: updatedCart });
+    if (!isSelected) {
+      dispatch(cartSlice.addNew(product));
 
       return;
     }
 
-    dispatch({ type: 'updateCart', payload: [...cart, product] });
+    dispatch(cartSlice.removeItem(product));
   }
 
   useEffect(() => {
-    setFavorite(favoriteProducts.includes(itemId));
-    localStorage.setItem('favoriteProducts', JSON.stringify(favoriteProducts));
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [itemId, favoriteProducts, cart]);
+    setFavorite(favorites.includes(itemId));
+  }, [favorites, itemId]);
 
   return (
     <div className="add-to-cart__btnbox">

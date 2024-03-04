@@ -6,9 +6,12 @@ import { Navbar } from '../Navbar';
 import { MyLogo } from '../UI/MyLogo';
 import { MySearch } from '../UI/MySearch';
 import { CategoryName } from '../../types/product';
+import { useAppSelector } from '../../app/hooks';
 
 export const Header = () => {
-  const numberOfFavorite = favoriteProducts.length;
+  const { favorites } = useAppSelector(state => state.favorites)
+  const { cart } = useAppSelector(state => state.cart)
+  const numberOfFavorite = favorites.length;
   const productsInCart = cart.length;
   const { pathname } = useLocation();
 

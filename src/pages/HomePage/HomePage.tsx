@@ -21,6 +21,10 @@ export const HomePage = () => {
   const { phones, loading, error } = useAppSelector(state => state.phones)
 
   useEffect(() => {
+    if(!phones.length) {
+      return;
+    }
+    
     setNewProducts(getBrandNewProducts(phones));
     setHotProducts(getHotPriceProducts(phones));
   }, [phones]);

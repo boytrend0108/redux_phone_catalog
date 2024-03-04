@@ -1,16 +1,17 @@
-import { useContext } from 'react';
+
 import { Link } from 'react-router-dom';
-import { Category } from '../../types/product';
+
 import './CategoryItem.scss';
-import { StateContext } from '../../store/State';
+import { Category } from '../../types/product';
+import { useAppSelector } from '../../app/hooks';
 
 type Props = {
   category: Category;
 };
 
 export const CategoryItem: React.FC<Props> = ({ category }) => {
-  const { allProducts } = useContext(StateContext);
-  const quantity = allProducts.filter(product => {
+  const { phones } = useAppSelector(state => state.phones);
+  const quantity = phones.filter(product => {
     return product.category === category.category;
   }).length;
 

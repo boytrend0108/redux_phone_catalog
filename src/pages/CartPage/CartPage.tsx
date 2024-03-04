@@ -5,17 +5,16 @@ import './CartPage.scss';
 import { MyBackLink } from '../../components/UI/MyBackLink';
 import { MyLoader } from '../../components/UI/MyLoader';
 import { MyButton } from '../../components/UI/MyButton';
+import { MyModal } from '../../components/UI/MyModal';
 import { CartItem } from '../../components/CartItem';
 
-import { getLocalStorigeData } from '../../helpers/localStorageHelper';
-import { Cart } from '../../types/cart';
-import { MyModal } from '../../components/UI/MyModal';
 import { setScrollState } from '../../helpers/pageHelper';
 
+import { useAppSelector } from '../../app/hooks';
+
 export const CartPage = () => {
-  const cart = [];
   const [loading, setLoading] = useState(true);
-  const [products, setProducts] = useState<Cart>([]);
+  const { cart } = useAppSelector(state => state.cart)
   const [showModal, setShowModal] = useState(false);
 
   const cartData = cart.reduce((acc, item) => {
@@ -28,9 +27,9 @@ export const CartPage = () => {
   const { totalPrice, quantity } = cartData;
 
   useEffect(() => {
-    const currentCart = getLocalStorigeData('cart');
+   
 
-    setProducts(currentCart);
+
     setLoading(false);
   }, [cart]);
 
@@ -56,12 +55,12 @@ export const CartPage = () => {
         ? <MyLoader />
         : (
           <>
-            {!products.length
+            {!cart.length
               ? <h2>Your cart is empty</h2>
               : (
                 <div className="cart-page__products">
                   <div className="cart-page__list">
-                    {products.map(item => (
+                    {cart.map(item => (
                       <CartItem
                         key={item.image}
                         product={item}

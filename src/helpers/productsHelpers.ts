@@ -8,7 +8,7 @@ export function getBrandNewProducts(products: Product[]): Product[] {
 }
 
 export function getHotPriceProducts(products: Product[]): Product[] {
-  return products
+  const sorted = [...products]
     .sort((product1, product2) => {
       const discount1 = (product1.fullPrice - product1.price);
       const discount2 = (product2.fullPrice - product2.price);
@@ -16,4 +16,6 @@ export function getHotPriceProducts(products: Product[]): Product[] {
       return discount2 - discount1;
     })
     .slice(0, 22);
+
+    return sorted;
 }

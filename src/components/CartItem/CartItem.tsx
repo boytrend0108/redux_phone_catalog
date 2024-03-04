@@ -1,18 +1,13 @@
-import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './CartItem.scss';
-import { DispatchContext, StateContext } from '../../store/State';
 import { CartItemType } from '../../types/cart';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import * as cartSlice from '../../features/cart/cartSlice';
 
 type Props = {
   product: CartItemType;
 };
-
-enum Action {
-  add = 'add',
-  remove = 'remove',
-}
 
 export const CartItem: React.FC<Props> = ({ product }) => {
   const {
@@ -20,45 +15,14 @@ export const CartItem: React.FC<Props> = ({ product }) => {
     name,
     price,
     itemId,
-    quantity,
   } = product;
 
-  const [counter, setCounter] = useState(quantity);
-  const { cart } = useContext(StateContext);
-  const dispatch = useContext(DispatchContext);
+  const { cart } = useAppSelector(state => state.cart);
+  const dispatch = useAppDispatch();
 
-  function handleDelete() {
-    const updatedCart = cart.filter(item => item.itemId !== itemId);
-
-    dispatch({ type: 'updateCart', payload: updatedCart });
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-  }
-
-  function handleChangeCounter(action: string) {
-    let updatedCart: CartItemType[] = [];
-
-    setCounter(prev => {
-      return action === Action.remove
-        ? prev - 1
-        : prev + 1;
-    });
-
-    updatedCart = cart.map(el => {
-      if (el.itemId === itemId) {
-        return {
-          ...el,
-          quantity: action === Action.remove
-            ? el.quantity - 1
-            : el.quantity + 1,
-        };
-      }
-
-      return el;
-    });
-
-    dispatch({ type: 'updateCart', payload: updatedCart });
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-  }
+  const quantity = cart.find(el => {
+    return el.itemId === itemId
+  })?.quantity || 1;
 
   return (
     <div className="cart-item">
@@ -66,8 +30,9 @@ export const CartItem: React.FC<Props> = ({ product }) => {
         type="button"
         className="cart-item__delete"
         aria-label="delete item"
-        onClick={handleDelete}
-      />
+        onClick={() => dispatch(cartSlice.removeItem(product))
+      }
+    />
 
       <Link
         to={`../phones/${itemId}`}
@@ -88,22 +53,22 @@ export const CartItem: React.FC<Props> = ({ product }) => {
             type="button"
             className="cart-item__control cart-item__control--minus"
             aria-label="minus one"
-            disabled={counter === 1}
-            onClick={() => handleChangeCounter(Action.remove)}
+            disabled={quantity === 1}
+            onClick={() => dispatch(cartSlice.decrease(itemId))}
           />
 
-          <p className="cart-item__quantity">{counter}</p>
+          <p className="cart-item__quantity">{quantity}</p>
 
           <button
             type="button"
             className="cart-item__control cart-item__control--plus"
             aria-label="plus one"
-            onClick={() => handleChangeCounter(Action.add)}
+            onClick={() => dispatch(cartSlice.increase(itemId))}
           />
         </div>
       </div>
 
-      <h2 className="cart-item__price">{`$${price * counter}`}</h2>
+      <h2 className="cart-item__price">{`$${price * quantity}`}</h2>
     </div>
   );
 };
