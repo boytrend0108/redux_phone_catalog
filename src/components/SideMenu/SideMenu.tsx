@@ -4,8 +4,11 @@ import { Link, useLocation } from 'react-router-dom';
 import './SideMenu.scss';
 import { MyNavLink } from '../UI/MyNavLink';
 import { setScrollState } from '../../helpers/pageHelper';
+import { useAppSelector } from '../../app/hooks';
 
 export const SideMenu = () => {
+  const { cart } = useAppSelector(state => state.cart);
+  const { favorites } = useAppSelector(state => state.favorites);
   const { hash, search } = useLocation();
   const isSideMenuOpened = hash.includes('side-menu');
 
@@ -30,8 +33,20 @@ export const SideMenu = () => {
         <MyNavLink pathname="/phones" search={search}> Phones </MyNavLink>
         <MyNavLink pathname="/tablets"> Tablets </MyNavLink>
         <MyNavLink pathname="/accessories"> Accessories </MyNavLink>
-        <MyNavLink pathname="/favorite">Favorites </MyNavLink>
-        <MyNavLink pathname="/cart">Cart</MyNavLink>
+
+        <div className="side-menu__cart">
+          <MyNavLink pathname="/favorite">Favorites </MyNavLink>
+          {!!favorites.length && (
+            <div className="side-menu__counter--favorites">{favorites.length}</div>
+          )}
+        </div>
+
+        <div className="side-menu__cart">
+          <MyNavLink pathname="/cart">Cart</MyNavLink>
+          {!!cart.length && (
+            <div className="side-menu__counter">{cart.length}</div>
+          )}
+        </div>
       </div>
     </aside>
   );

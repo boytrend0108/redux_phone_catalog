@@ -5,6 +5,7 @@ import { MyButton } from '../UI/MyButton';
 import { CartItemType } from '../../types/cart';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import * as cartSlice from '../../features/cart/cartSlice';
+import * as favoritesSlice from '../../features/favorites/favoritesSlice';
 
 type Props = {
   product: CartItemType;
@@ -24,9 +25,9 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
 
   function handleSetFavorite() {
     if (!favorite) {
-      dispatch({ type: 'addFavorite', payload: itemId });
+      dispatch(favoritesSlice.add(itemId));
     } else {
-      dispatch({ type: 'removeFavorite', payload: itemId });
+      dispatch(favoritesSlice.remove(itemId));
     }
   }
 

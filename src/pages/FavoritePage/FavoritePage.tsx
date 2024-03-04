@@ -6,53 +6,33 @@ import { ProductList } from '../../components/ProductList';
 import { MyLoader } from '../../components/UI/MyLoader';
 
 import { Product } from '../../types/product';
-import { getPhones } from '../../api/productApi';
+
+import { useAppSelector } from '../../app/hooks';
 
 export const FavoritePage = () => {
+  const { favorites } = useAppSelector(state => state.favorites);
+  const { phones } = useAppSelector(state => state.phones);
   const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [favorite, setFavorite] = useState<Product[]>([]);
+  const [favoritesList, setFavoritesList] = useState<Product[]>([]);
 
   useEffect(() => {
-    const data = localStorage.getItem('favoriteProducts');
+    const list = phones.filter(el => favorites.includes(el.itemId));
 
-    if (data) {
-      try {
-        const favoriteProductsIds = JSON.parse(data) as string[];
-
-        getPhones<Product>()
-          .then(res => {
-            const onlyFavorite
-              = res.filter(el => favoriteProductsIds.includes(el.itemId));
-
-            setFavorite(onlyFavorite);
-          })
-          .catch(() => setErrorMessage('Samething went wrong....'))
-          .finally(() => setLoading(false));
-      } catch (err) {
-        setLoading(false);
-        setErrorMessage('Local storage error..');
-        localStorage.removeItem('favoriteProducts');
-      }
-    }
-  }, []);
+    setFavoritesList(list);
+    setLoading(false);
+  }, [favorites, phones]);
 
   return (
     <section className="favorite">
       <BreadCrumbs />
 
       <h1 className="favorite__title">Favourites</h1>
-      <p className="favorite__counter">{`${favorite.length} models`}</p>
+      <p className="favorite__counter">{`${favorites.length} models`}</p>
 
       {loading
         ? <MyLoader />
-        : (
-          <>
-            {errorMessage
-              ? <h2>{errorMessage}</h2>
-              : <ProductList products={favorite} />}
-          </>
-        )}
+        : <ProductList products={favoritesList} />}
+
     </section>
   );
 };
