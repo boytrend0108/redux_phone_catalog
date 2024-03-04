@@ -1,17 +1,41 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { Reducer, combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import phonesSlice from '../features/phones/phonesSlice';
-import cartSlice from '../features/cart/cartSlice';
-import favoritesSlice from '../features/favorites/favoritesSlice';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { persistStore } from 'redux-persist';
 
+import phonesSlice, { PhonesState } from '../features/phones/phonesSlice';
+import cartSlice, { CartState } from '../features/cart/cartSlice';
+import favoritesSlice, { FavoritesState } from '../features/favorites/favoritesSlice';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+export type RootState = {
+  phones: PhonesState;
+  cart: CartState;
+  favorites: FavoritesState;
+};
+
+const rootReducer: Reducer = combineReducers({
+  phones: phonesSlice,
+  cart: cartSlice,
+  favorites: favoritesSlice,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    phones: phonesSlice,
-    cart: cartSlice,
-    favorites: favoritesSlice,
-  }
-})
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST'],
+    },
+  }),
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+
+export type AppDispatch = typeof store.dispatch;
+export const persistor = persistStore(store);

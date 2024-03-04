@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { Product } from '../../types/product'
 import { getAllProducts } from '../../api/productApi';
 
-interface PhonesState {
+export interface PhonesState {
   loading: boolean;
   phones: Product[];
   error: string;
