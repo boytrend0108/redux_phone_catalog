@@ -7,6 +7,7 @@ import { MyLogo } from '../UI/MyLogo';
 import { MySearch } from '../UI/MySearch';
 import { CategoryName } from '../../types/product';
 import { useAppSelector } from '../../app/hooks';
+import { ThemeSwitcher } from '../ThemeSwitcher';
 
 export const Header = () => {
   const { favorites } = useAppSelector(state => state.favorites)
@@ -23,6 +24,10 @@ export const Header = () => {
       </div>
 
       <div className="header__right">
+        <div className="header__theme">
+          <ThemeSwitcher />
+        </div>
+
         {pathname === '/phones' && (
           <MySearch
             placeholder={CategoryName.phone}
@@ -34,8 +39,8 @@ export const Header = () => {
           className={({ isActive }) => {
             return classNames(
               'header__link header__link--favorite', {
-                'header__link--active': isActive,
-              },
+              'header__link--active': isActive,
+            },
             );
           }}
         >
@@ -52,8 +57,8 @@ export const Header = () => {
           className={({ isActive }) => {
             return classNames(
               'header__link header__link--cart', {
-                'header__link--active': isActive,
-              },
+              'header__link--active': isActive,
+            },
             );
           }}
         >

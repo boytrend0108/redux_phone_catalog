@@ -18,6 +18,7 @@
   &__left,
   &__right {
     display: flex;
+    align-items: center;
 
     @include on-mobile-l {
       width: 100%;
@@ -89,5 +90,9 @@
       top: 5px;
       left: 20px;
     }
+  }
+
+  &__theme {
+    margin-right: 20px;
   }
 }

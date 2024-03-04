@@ -1,4 +1,6 @@
-.App {
+@import './styles/utils/utils';
+
+.app {
   min-height: 100vh;
   display: grid;
   grid-template-rows: 64px 1fr 96px;
@@ -7,4 +9,16 @@
    'main'
    'footer'
   ;
+
+  background-color: $color-white;
+  color: $color_primary;
+
+  transition:
+    background-color ease-in-out $transition-duration,
+    color ease-in-out $transition-duration;
+
+  &--dark {
+    background-color: $color-primary;
+    color: $color-white;
+  }
 }

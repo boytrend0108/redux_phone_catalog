@@ -1,0 +1,19 @@
+@import "../../styles/utils/utils";
+
+.theme-switcher {
+  width: 60px;
+  border-radius: 30px;
+  border: 1px solid $color-background;
+  box-sizing: border-box;
+  padding: 5px;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 50%;
+    width: 50%;
+    border-radius: 50%;
+    background-color: $color-primary;
+    cursor: pointer;
+  }
+}
