@@ -24,9 +24,11 @@ export const Header = () => {
       </div>
 
       <div className="header__right">
-        <div className="header__theme">
-          <ThemeSwitcher />
-        </div>
+        {false && (
+          <div className="header__theme">
+            <ThemeSwitcher />
+          </div>
+        )}
 
         {pathname === '/phones' && (
           <MySearch
