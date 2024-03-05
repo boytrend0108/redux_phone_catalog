@@ -18,7 +18,7 @@ export type RootState = {
   phones: PhonesState;
   cart: CartState;
   favorites: FavoritesState;
-  switchTheme: ThemeState;
+  theme: ThemeState;
 };
 
 const rootReducer: Reducer = combineReducers({

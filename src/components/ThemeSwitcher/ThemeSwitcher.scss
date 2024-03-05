@@ -15,5 +15,14 @@
     border-radius: 50%;
     background-color: $color-primary;
     cursor: pointer;
+    transition: transform ease-in-out $transition-duration;
+    transform: translateX(0);
+
+  }
+
+  &--dark {
+    &::after {
+      transform: translateX(100%);
+    }
   }
 }

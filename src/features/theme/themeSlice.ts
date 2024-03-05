@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 type Theme = 'dark' | 'white'
 
@@ -7,15 +7,15 @@ export type ThemeState = {
 };
 
 const initialState: ThemeState = {
-  theme: 'dark',
+  theme: 'white',
 };
 
 const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    switchTheme: (state, action: PayloadAction<Theme>) => {
-      state.theme = action.payload
+    switchTheme: state => {
+      state.theme = state.theme === 'white' ? 'dark' : 'white';
     }
   }
 });
