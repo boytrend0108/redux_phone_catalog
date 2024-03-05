@@ -20,6 +20,7 @@ export const Header = () => {
     <header className="header" id="top">
       <div className="header__left">
         <MyLogo />
+        ++
         <Navbar />
       </div>
 
