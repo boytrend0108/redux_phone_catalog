@@ -27,13 +27,13 @@
     text-transform: capitalize;
 
     &::after {
-      content: url(../../../../public/img/icons/chevron-down.svg);
+      content: url(img/icons/chevron-down.svg);
       width: 16px;
       height: 16px;
     }
 
     &:focus::after {
-      content: url(../../../../public/img/icons/chevron-up.svg);
+      content: url(img/icons/chevron-up.svg);
     }
 
     &:hover {
