@@ -10,7 +10,7 @@ The rest of the data is retrieved from the API.
 
 - Front-end: REACT, TYPESCRIPT, REDUX, SCSS
 
-![App Screenshot](https://raw.githubusercontent.com/boytrend0108/delegat/master/public/delegat-home.png)
+![App Screenshot](https://raw.githubusercontent.com/boytrend0108/redux_phone_catalog/develop/public/img/PHONE-CATALOG.png)
 
 ## Demo
 
