@@ -27,9 +27,6 @@ export const CartPage = () => {
   const { totalPrice, quantity } = cartData;
 
   useEffect(() => {
-   
-
-
     setLoading(false);
   }, [cart]);
 

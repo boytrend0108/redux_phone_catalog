@@ -6,13 +6,12 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { SideMenu } from './components/SideMenu';
 import { getLocalStorigeData } from './helpers/localStorageHelper';
-import { useAppDispatch, useAppSelector } from './app/hooks';
+import { useAppDispatch} from './app/hooks';
 import * as phonesSlice from './features/phones/phonesSlice';
 import classNames from 'classnames';
 
 export const App = () => {
   const dispatch = useAppDispatch();
-  const { theme } = useAppSelector(state => state.theme);
 
   useEffect(() => {
     dispatch(phonesSlice.phonesInit());
@@ -42,7 +41,7 @@ export const App = () => {
 
   return (
     <div className={classNames("app", {
-      'app--dark': theme === 'dark',
+      'app--dark': false,
     }
     )}>
       <Header />
