@@ -15,7 +15,7 @@ export const Footer = () => {
 
           <nav className="footer__nav">
             <NavLink
-              to="https://github.com/boytrend0108/react_phone-catalog"
+              to="https://github.com/boytrend0108/redux_phone_catalog"
               target="_blank"
               className="footer__link"
             >
