@@ -38,7 +38,7 @@
     @include hover(background-color, $color-background);
 
     &::after {
-      content: url(img/icons/chevron-up.svg);
+      content: url(@public/img/icons/chevron-up.svg);
       margin-top: 5px;
     }
   }

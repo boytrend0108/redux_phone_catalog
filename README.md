@@ -23,7 +23,7 @@ The rest of the data is retrieved from the API.
 1.Clone the repository:
 
 ```bash
-  https://github.com/boytrend0108/redux_phone_catalog.git
+https://github.com/boytrend0108/redux_phone_catalog
 ```
 
 2.Install the required dependencies:
