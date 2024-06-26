@@ -11,3 +11,7 @@ export function getProduct<T>(id: string): Promise<T> {
 export function getPhones<T>(): Promise<T[]> {
   return client.get('/products.json');
 }
+
+export function getTablets<T>(): Promise<T[]> {
+  return client.get('/tablets.json');
+}

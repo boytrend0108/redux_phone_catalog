@@ -6,6 +6,7 @@ import { getPreparedProducts } from '../../helpers/getPreparedProducts';
 import { SortParams } from '../../types/select';
 import { Product } from '../../types/product';
 import { ProductList } from '../../components/ProductList';
+import { getTablets } from '../../api/productApi';
 
 export const TabletsPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,7 +21,7 @@ export const TabletsPage = () => {
   const tabletsQuantity = tablets.length;
 
   useEffect(() => {
-    getPhones<Product>()
+    getTablets<Product>()
       .then(setTablets)
       .catch(() => setErrorMessage('Something went wrong...'))
       .finally(() => setLoading(false));
@@ -35,7 +36,7 @@ export const TabletsPage = () => {
 
         <h1 className="phones-page__title">Tablets</h1>
 
-        <p className="phones-page__counter">{`${0} models`}</p>
+        <p className="phones-page__counter">{`${tabletsQuantity} models`}</p>
       </header>
 
       <main>
