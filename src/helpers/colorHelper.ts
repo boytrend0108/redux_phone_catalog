@@ -5,6 +5,7 @@ export const getColorHex = (color: string) => {
     case 'gold': return '#f6e0c9';
     case 'silver': return '#E4E4E2';
     case 'spacegray': return '#25282A';
+    case 'space gray': return '#25282A';
     case 'green': return '#364935';
     case 'yellow': return '#F3D060';
     case 'white': return '#F9F6EF';

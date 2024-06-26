@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import './ProductDetailsPage.scss';
-import { Product, ProductDescription } from '../../types/product';
-import { getAllProducts, getProduct } from '../../api/productApi';
+import { CategoryName, Product } from '../../types/product';
+import { getAccessories, getAllProducts, getPhones, getTablets } from '../../api/productApi';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { MyLoader } from '../../components/UI/MyLoader';
 import { ProductDetails } from '../../components/ProductDetails';
 import { ProductSlider } from '../../components/ProductsSlider';
 import { MyBackLink } from '../../components/UI/MyBackLink';
+import { useAppDispatch } from '../../app/hooks';
+import { productAction } from '../../features/phones/phonesSlice';
 
 async function getSuggestedProducts() {
   const products = await getAllProducts<Product[]>();
@@ -18,33 +20,86 @@ async function getSuggestedProducts() {
 
 export const ProductDetailsPage = () => {
   const [product, setProduct]
-    = useState<ProductDescription>({} as ProductDescription);
+    = useState<Product>({} as Product);
 
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
   const [errorSuggested, setErrorSuggested] = useState('');
-
+  const [products, setProducts] = useState<Product[]>([]);
+  const { pathname } = useLocation();
   const { productId } = useParams();
+  const dispatch = useAppDispatch();
 
   if (!product) {
     setErrorMessage('There is no data for this product...');
   }
 
+  async function fetchProducts() {
+    const category = pathname.split('/')[1] as CategoryName;
+
+    switch (category) {
+      case CategoryName.phone: {
+        getPhones<Product>()
+          .then((res) => {
+            dispatch(productAction.setProducts(res))
+            setProducts(res)
+          })
+          .catch(() => setErrorMessage('Something went wrong...'))
+          .finally(() => setLoading(false));
+
+        break;
+      }
+
+      case CategoryName.tablet:
+        getTablets<Product>()
+          .then((res) => {
+            dispatch(productAction.setProducts(res))
+            setProducts(res)
+          })
+          .catch(() => setErrorMessage('Something went wrong...'))
+          .finally(() => setLoading(false));
+        break;
+
+      case CategoryName.accessory:
+        getAccessories<Product>()
+          .then((res) => {
+            dispatch(productAction.setProducts(res))
+            setProducts(res)
+          })
+          .catch(() => setErrorMessage('Something went wrong...'))
+          .finally(() => setLoading(false));
+        break;
+
+      default:
+        setErrorMessage('Category not found...')
+    }
+  }
+
   useEffect(() => {
+    setErrorMessage('');
+
     if (!productId) {
       return;
     }
 
-    getProduct<ProductDescription>(productId)
-      .then(setProduct)
-      .catch(() => setErrorMessage('Something went wrong...'));
+    fetchProducts()
+      .then(() => {
+        setErrorMessage('')
+        const product = products?.find(el => el.id === productId);
+
+        if (product) {
+          setProduct(product);
+        } else {
+          setErrorMessage('Something went wrong...')
+        }
+      })
 
     getSuggestedProducts()
       .then(setSuggestedProducts)
       .catch(() => setErrorSuggested('Something went wrong...'))
       .finally(() => setLoading(false));
-  }, [productId]);
+  }, [productId, products.length]);
 
   return (
     <div className="product-details">
@@ -66,7 +121,15 @@ export const ProductDetailsPage = () => {
             <>
               {!errorMessage
                 ? <ProductDetails product={product} />
-                : <p>{errorMessage}</p>}
+                : <>
+                  <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Product not found</h2>
+                  <img
+                    src="img/product-not-found.png"
+                    width={300} height={300}
+                    style={{ margin: '0 auto', display: 'block' }}
+                  />
+                </>
+              }
             </>
           )}
       </main>

@@ -16,9 +16,7 @@ export const FavoritePage = () => {
   const [favoritesList, setFavoritesList] = useState<Product[]>([]);
 
   useEffect(() => {
-    const list = phones.filter(el => favorites.includes(el.itemId));
-
-    setFavoritesList(list);
+    setFavoritesList(favorites);
     setLoading(false);
   }, [favorites, phones]);
 

@@ -7,7 +7,7 @@
   &__list,
   &__button-list {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 8px;
   }
 
@@ -18,8 +18,8 @@
   }
 
   &__mobile {
-    display: none;
     margin-inline: 12px;
+    text-align: center;
 
     @include on-tablet-s {
       display: block;

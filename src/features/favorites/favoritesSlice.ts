@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Product } from "../../types/product";
 
 export type FavoritesState = {
-  favorites: string[];
+  favorites: Product[];
 }
 
-const initialState: FavoritesState  = {
+const initialState: FavoritesState = {
   favorites: []
 };
 
 const favoritesSlise = createSlice({
-  name: 'favorite', 
+  name: 'favorite',
   initialState,
   reducers: {
     add: (state, action) => {
@@ -17,10 +18,10 @@ const favoritesSlise = createSlice({
     },
 
     remove: (state, action) => {
-      state.favorites = state.favorites.filter(el => el !== action.payload)
+      state.favorites = state.favorites.filter(el => el.id !== action.payload.id)
     }
   }
 })
 
 export default favoritesSlise.reducer;
-export const {add, remove} = favoritesSlise.actions;
+export const { add, remove } = favoritesSlise.actions;

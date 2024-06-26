@@ -15,11 +15,22 @@ export type Product = {
   price: number,
   fullPrice: number,
   discount: number,
+  priceDiscount: number,
+  priceRegular: number,
   screen: string,
   capacity: string,
   ram: string,
   color: string,
   year: number,
+  namespaceId: string;
+  capacityAvailable: string[];
+  colorsAvailable: string[]
+  description: any[];
+  resolution: string;
+  processor: string;
+  camera: string;
+  zoom: string;
+  cell: string;
 };
 
 export type NewProduct = Omit<Product, 'price'>;
@@ -35,7 +46,7 @@ export type ProductDescription = {
   color: string,
   colorsAvailable: string[],
   images: string[],
-  description: { title: string, text: string[] }[],
+  description: ProductDescriptionItem[],
   screen: string,
   resolution: string,
   processor: string,
@@ -51,3 +62,9 @@ export type Category = {
   img: string;
   category: CategoryName;
 };
+
+type ProductDescriptionItem = {
+  title: string;
+  text: string[]
+
+}

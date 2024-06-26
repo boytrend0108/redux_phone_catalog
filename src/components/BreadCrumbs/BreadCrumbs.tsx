@@ -47,7 +47,7 @@ export const BreadCrumbs = () => {
                   }}
                   className="breadcrumbs__link"
                 >
-                  {el}
+                  {el.toUpperCase()}
                 </NavLink>
               )}
 

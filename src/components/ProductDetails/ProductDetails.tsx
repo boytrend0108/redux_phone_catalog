@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 import './ProductDetails.scss';
 import { AddToCart } from '../AddToCart';
-import { ProductDescription } from '../../types/product';
+import { Product, ProductDescription } from '../../types/product';
 import { CartItemType } from '../../types/cart';
 import { AvailableColors } from '../AvailableColors';
 import { AvailableCapacity } from '../AvailableCapacity';
 
 type Props = {
-  product: ProductDescription;
+  product: Product;
 };
 
 const PARAMS: (keyof ProductDescription)[] = [
@@ -30,14 +30,21 @@ export const ProductDetails: React.FC<Props> = ({ product }) => {
     description = [],
     colorsAvailable = [],
     capacityAvailable = [],
+    category,
+    ram,
+    capacity,
   } = product;
 
   const cartItemData: CartItemType = {
-    itemId: product.id,
+    id: product.id,
     name,
-    image: images[0],
-    price: priceDiscount,
+    images,
+    priceDiscount,
     quantity: 1,
+    priceRegular: 0,
+    capacity,
+    ram,
+    category,
   };
 
   const [mainImage, setMainImage] = useState('');

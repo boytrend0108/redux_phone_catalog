@@ -13,7 +13,7 @@ type Props = {
 
 export const AddToCart: React.FC<Props> = ({ product }) => {
   const {
-    itemId,
+    id,
   } = product;
 
   const [favorite, setFavorite] = useState(false);
@@ -21,13 +21,13 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
   const { favorites } = useAppSelector(state => state.favorites);
   const dispatch = useAppDispatch();
 
-  const isSelected = cart.some(el => el.itemId === itemId);
+  const isSelected = cart.some(el => el.id === id);
 
   function handleSetFavorite() {
     if (!favorite) {
-      dispatch(favoritesSlice.add(itemId));
+      dispatch(favoritesSlice.add(product));
     } else {
-      dispatch(favoritesSlice.remove(itemId));
+      dispatch(favoritesSlice.remove(product));
     }
   }
 
@@ -42,8 +42,10 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
   }
 
   useEffect(() => {
-    setFavorite(favorites.includes(itemId));
-  }, [favorites, itemId]);
+    const isFavorite = favorites.some(el => el.id === id);
+
+    setFavorite(isFavorite);
+  }, [favorites]);
 
   return (
     <div className="add-to-cart__btnbox">

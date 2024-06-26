@@ -18,17 +18,17 @@ const cartSlice = createSlice({
     addNew: (state, action: PayloadAction<CartItemType>) => {
       state.cart.push(action.payload)
 
-      state.totalPrice += action.payload.price;
+      state.totalPrice += action.payload.priceDiscount;
     },
 
     removeItem: (state, action: PayloadAction<CartItemType>) => {
-      state.cart = state.cart.filter(el => el.itemId !== action.payload.itemId);
+      state.cart = state.cart.filter(el => el.id !== action.payload.id);
 
-      state.totalPrice -= action.payload.price * action.payload.quantity;
+      state.totalPrice -= action.payload.priceDiscount * action.payload.quantity;
     },
 
     increase: (state, action: PayloadAction<string>) => {
-      const index = state.cart.findIndex(el => el.itemId === action.payload)
+      const index = state.cart.findIndex(el => el.id === action.payload)
 
       state.cart[index].quantity += 1;
 
@@ -36,7 +36,7 @@ const cartSlice = createSlice({
     },
 
     decrease: (state, action: PayloadAction<string>) => {
-      const index = state.cart.findIndex(el => el.itemId === action.payload)
+      const index = state.cart.findIndex(el => el.id === action.payload)
 
       state.cart[index].quantity -= 1;
 

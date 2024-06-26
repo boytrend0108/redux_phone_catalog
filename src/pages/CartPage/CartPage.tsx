@@ -19,7 +19,7 @@ export const CartPage = () => {
 
   const cartData = cart.reduce((acc, item) => {
     return {
-      totalPrice: acc.totalPrice + item.price * item.quantity,
+      totalPrice: acc.totalPrice + item.priceDiscount * item.quantity,
       quantity: acc.quantity + item.quantity,
     };
   }, { totalPrice: 0, quantity: 0 });
@@ -59,7 +59,7 @@ export const CartPage = () => {
                   <div className="cart-page__list">
                     {cart.map(item => (
                       <CartItem
-                        key={item.image}
+                        key={item.images[0]}
                         product={item}
                       />
                     ))}

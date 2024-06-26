@@ -16,9 +16,9 @@ export const Navbar = () => {
 
       <div className="navbar__main">
         <MyNavLink pathname="/"> Home </MyNavLink>
-        <MyNavLink pathname="/phones"> Phones </MyNavLink>
-        <MyNavLink pathname="/tablets"> Tablets </MyNavLink>
-        <MyNavLink pathname="/accessories"> Accessories </MyNavLink>
+        <MyNavLink pathname="/phones" search='perPage=16'> Phones </MyNavLink>
+        <MyNavLink pathname="/tablets" search='perPage=16'> Tablets </MyNavLink>
+        <MyNavLink pathname="/accessories" search='?perPage=16"'> Accessories </MyNavLink>
       </div>
     </nav>
   );

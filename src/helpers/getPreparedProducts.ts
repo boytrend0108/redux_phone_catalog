@@ -9,13 +9,24 @@ export function getPreparedProducts(
 
   preparedProducts.sort((product1, product2) => {
     switch (sortBy) {
-      case 'age':
-        return product2.year - product1.year;
+      case 'age': {
+        const model1 = product1.name.match(/\d+/);
+        const model2 = product2.name.match(/\d+/);
+
+        if (!model1 || !model2) {
+          return 0;
+        }
+
+        return +model2[0] - +model1[0];
+      }
+
       case 'name':
         return product1.name.toLowerCase()
           .localeCompare(product2.name.toLowerCase());
+
       case 'price':
-        return product1.price - product2.price;
+        return product1.priceDiscount - product2.priceDiscount;
+
       default:
         return 0;
     }

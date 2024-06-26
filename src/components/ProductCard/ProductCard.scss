@@ -1,9 +1,9 @@
-@import "../../styles/utils/utils";
+@import '../../styles/utils/utils';
 
-.product-card{
+.product-card {
   max-width: 272px;
-  max-height: 507px;
-  min-width: 200px;
+  max-height: 528px;
+  min-width: 232px;
   padding: 24px;
   box-sizing: border-box;
   display: flex;
@@ -30,6 +30,7 @@
     max-height: 208px;
     min-height: 150px;
     transition: transform ease-in-out $transition-duration;
+    object-fit: cover;
 
     &:hover {
       transform: scale(1.1);
@@ -69,37 +70,21 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 
     @extend %small-text;
   }
 
   &__option-name {
     color: $color-secondary;
+
+    &--screen {
+      height: 45px;
+    }
   }
 
   &__option-value {
     font-weight: 600;
+    text-align: end;
   }
-
-  // &__btnbox {
-  //   display: flex;
-  //   gap: 8px;
-  //   width: 100%;
-  // }
-
-  // &__favorite {
-  //   width: 40px;
-  //   height: 40px;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   background: transparent;
-  //   border: 1px solid $color-background;
-  //   transition: border ease-in-out $transition-duration;
-  //   cursor: pointer;
-
-  //   &:hover {
-  //     border: 1px solid $color-primary;
-  //   }
-  // }
 }

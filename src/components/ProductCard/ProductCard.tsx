@@ -18,21 +18,26 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
   const {
     id,
     itemId,
-    image,
+    images,
     name,
-    price,
-    fullPrice,
+    priceDiscount,
+    priceRegular,
     screen,
     capacity,
     ram,
+    category,
   } = product;
 
   const cartItem: CartItemType = {
-    itemId,
+    id,
     name,
-    image,
-    price,
+    images,
+    priceDiscount,
+    priceRegular,
     quantity: 1,
+    capacity,
+    ram,
+    category,
   };
 
   const preparedCapacity = useMemo(() => {
@@ -49,36 +54,39 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
       data-cy="cardsContainer"
     >
       <Link
-        to={`/phones/${itemId || id}`}
+        to={`/${category}/${itemId || id}`}
         state={{ product }}
         className="product-card__link"
         onClick={() => window.scrollTo(0, HEADER_HEIGHT)}
       >
         <div className="product-card__imgbox">
           <img
-            src={`${image}`}
+            loading='lazy'
+            src={`${images[0]}`}
             alt={name}
             className="product-card__img"
+            height={207}
+            width={159}
           />
         </div>
 
         <p className="product-card__title">{name}</p>
 
         <div className="product-card__pricebox">
-          {!isNew && <h2>{`$${price}`}</h2>}
+          {!isNew && <h2>{`$${priceDiscount}`}</h2>}
 
           <h2
             className={classNames({
               'product-card__price': !isNew,
             })}
           >
-            {`$${fullPrice}`}
+            {`$${priceRegular}`}
           </h2>
         </div>
 
         <ul className="product-card__options">
           <li className="product-card__option-item">
-            <p className="product-card__option-name">Screen</p>
+            <p className="product-card__option-name product-card__option-name--screen">Screen</p>
             <p className="product-card__option-value">{screen}</p>
           </li>
           <li className="product-card__option-item">

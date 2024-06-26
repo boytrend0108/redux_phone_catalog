@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -12,17 +12,32 @@ type Props = {
 export const AvailableColors: React.FC<Props> = React
   .memo(({ colorsAvailable }) => {
     const { productId } = useParams();
-    const preparedId = productId?.split('-').slice(0, -1).join('-');
+    const sortedColors = [...colorsAvailable].sort((a, b) => a.localeCompare(b))
+
+    function getPath(color: string) {
+      let preparedId = productId?.split('-').slice(0, -1).join('-');
+      let preperadColor = color;
+
+      if (color === 'space gray') {
+        preperadColor = 'space-gray'
+      }
+
+      if (productId?.includes('space-gray')) {
+        preparedId = productId?.split('-').slice(0, -2).join('-');
+      }
+
+      return `../${preparedId}-${preperadColor}`
+    }
 
     return (
       <div className="available-colors">
         <p className="available-colors__title">Available colors</p>
 
         <div className="available-colors__box">
-          {colorsAvailable.map(color => (
+          {sortedColors.map(color => (
             <NavLink
               key={color}
-              to={`../${preparedId}-${color}`}
+              to={getPath(color)}
               className={
                 ({ isActive }) => classNames('available-colors__item-box', {
                   'available-colors__item-box--active': isActive,

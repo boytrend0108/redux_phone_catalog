@@ -21,7 +21,11 @@ export const phonesInit = createAsyncThunk('phones/fetch', () => {
 const phonesSlice = createSlice({
   name: 'phones',
   initialState,
-  reducers: {},
+  reducers: {
+    setProducts: (state, action) => {
+      state.phones = action.payload
+    }
+  },
 
   extraReducers: builder => {
     builder.addCase(phonesInit.pending, state => {
@@ -40,7 +44,8 @@ const phonesSlice = createSlice({
       state.error = 'Something went wrong...'
     })
   }
-
 });
+
+export const productAction = phonesSlice.actions;
 
 export default phonesSlice.reducer;

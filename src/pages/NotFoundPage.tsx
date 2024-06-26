@@ -20,6 +20,14 @@ export const NotFoundPage = () => {
           {' '}
           for more options.
         </p>
+        <br />
+        <img
+          src='img/page-not-found.png'
+          alt='page not found'
+          height={400}
+          width={400}
+          style={{ margin: '0 auto', display: 'block' }}
+        />
       </main>
     </section>
   );

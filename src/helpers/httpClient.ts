@@ -1,5 +1,5 @@
-const BASE_URL
-  = 'https://boytrend0108.github.io/redux_phone_catalog/api';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 
 function handleResponce(response: Response) {
   if (!response.ok) {

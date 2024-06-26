@@ -16,7 +16,7 @@ type Props = {
 };
 
 const GAP = 16;
-const ITEM_MIN_WIGTH = 200;
+const ITEM_MIN_WIGTH = 232;
 const MAX_ITEM_IN_SLIDER = 4;
 const WRAPPER_MIN_WIDTH = 232;
 

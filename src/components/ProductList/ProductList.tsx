@@ -12,7 +12,7 @@ type Props = {
 export const ProductList: React.FC<Props> = ({ products }) => {
   const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
-  const perPage = searchParams.get('perPage') || 'all';
+  const perPage = searchParams.get('perPage') || '16';
   const page = +(searchParams.get('page') || 1);
   const paginationButtons = [];
 
@@ -24,7 +24,7 @@ export const ProductList: React.FC<Props> = ({ products }) => {
     paginationButtons.push(i);
   }
 
-  function getPreparedProducts() {
+  function getProductsByPage() {
     if (perPage === 'all') {
       return products;
     }
@@ -35,7 +35,7 @@ export const ProductList: React.FC<Props> = ({ products }) => {
       .splice(((page * itemsOnPage) - itemsOnPage), itemsOnPage);
   }
 
-  const preparedProducts = getPreparedProducts();
+  const preparedProducts = getProductsByPage();
 
   return (
     <section className="product-list" data-cy="productList">

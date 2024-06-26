@@ -32,24 +32,35 @@ export const Pagination: React.FC<Props> = ({ paginationButtons }) => {
           />
         </li>
 
-        <h2 className="pagination__mobile">{`${page} out of ${paginationButtons.length}`}</h2>
+        {paginationButtons.length > 10 && (
+          <h2 className="pagination__mobile">{`${page} out of ${paginationButtons.length}`}</h2>
+        )}
 
-        <div className="pagination__button-list">
-          {paginationButtons.map(item => (
-            <li key={item}>
-              <Link
-                to={{
-                  search: getSearchParamsWith({ page: item }, searchParams),
-                }}
-                className={classNames('pagination__link', {
-                  'pagination__link--active': page === item,
-                })}
-              >
-                {item}
-              </Link>
-            </li>
-          ))}
-        </div>
+        {paginationButtons.length <= 10 && (
+          <div className='pagination__wr'>
+            <h2 className="pagination__mobile">{`${page} out of ${paginationButtons.length}`}</h2>
+
+            <div className="pagination__button-list">
+              {paginationButtons.map(item => (
+                <li key={item}>
+                  <Link
+                    to={{
+                      search: getSearchParamsWith({ page: item }, searchParams),
+                    }}
+                    className={classNames('pagination__link', {
+                      'pagination__link--active': page === item,
+                    })}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </div>
+          </div>
+
+        )}
+
+
 
         <li className="pagination__nav" data-cy="paginationRight">
           <MyNavButton

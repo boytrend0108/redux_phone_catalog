@@ -11,17 +11,17 @@ type Props = {
 
 export const CartItem: React.FC<Props> = ({ product }) => {
   const {
-    image,
+    images,
     name,
-    price,
-    itemId,
+    priceDiscount,
+    id,
   } = product;
 
   const { cart } = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
   const quantity = cart.find(el => {
-    return el.itemId === itemId
+    return el.id === id
   })?.quantity || 1;
 
   return (
@@ -31,16 +31,16 @@ export const CartItem: React.FC<Props> = ({ product }) => {
         className="cart-item__delete"
         aria-label="delete item"
         onClick={() => dispatch(cartSlice.removeItem(product))
-      }
-    />
+        }
+      />
 
       <Link
-        to={`../phones/${itemId}`}
+        to={`../phones/${id}`}
         className="cart-item__image-link"
       >
         <img
           className="cart-item__image"
-          src={`${image}`}
+          src={`${images[0]}`}
           alt={name}
         />
       </Link>
@@ -54,7 +54,7 @@ export const CartItem: React.FC<Props> = ({ product }) => {
             className="cart-item__control cart-item__control--minus"
             aria-label="minus one"
             disabled={quantity === 1}
-            onClick={() => dispatch(cartSlice.decrease(itemId))}
+            onClick={() => dispatch(cartSlice.decrease(id))}
           />
 
           <p className="cart-item__quantity">{quantity}</p>
@@ -63,12 +63,12 @@ export const CartItem: React.FC<Props> = ({ product }) => {
             type="button"
             className="cart-item__control cart-item__control--plus"
             aria-label="plus one"
-            onClick={() => dispatch(cartSlice.increase(itemId))}
+            onClick={() => dispatch(cartSlice.increase(id))}
           />
         </div>
       </div>
 
-      <h2 className="cart-item__price">{`$${price * quantity}`}</h2>
+      <h2 className="cart-item__price">{`$${priceDiscount * quantity}`}</h2>
     </div>
   );
 };
