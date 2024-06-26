@@ -1,4 +1,4 @@
-@import "../../styles/utils/utils";
+@import '../../styles/utils/utils';
 
 .slider {
   &__box {
@@ -23,13 +23,13 @@
     @include hover(background-color, $color-background);
 
     &--left::after {
-      content: url(img/icons/chevron-up.svg);
+      content: url(@public/img/icons/chevron-up.svg);
       transform: rotate(-90deg);
       margin-left: 5px;
     }
 
     &--right::after {
-      content: url(img/icons/chevron-up.svg);
+      content: url(@public/img/icons/chevron-up.svg);
       transform: rotate(90deg);
       margin-right: 5px;
     }
@@ -91,7 +91,7 @@
 
   &__banner-wr {
     height: 100%;
-    width:  100%;
+    width: 100%;
   }
 
   &__banner {

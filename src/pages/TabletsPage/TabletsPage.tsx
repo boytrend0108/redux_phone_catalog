@@ -1,7 +1,31 @@
-import { Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
+import { useEffect, useState } from 'react';
+import { MyLoader } from '../../components/UI/MyLoader';
+import { getPreparedProducts } from '../../helpers/getPreparedProducts';
+import { SortParams } from '../../types/select';
+import { Product } from '../../types/product';
+import { ProductList } from '../../components/ProductList';
 
 export const TabletsPage = () => {
+  const [searchParams] = useSearchParams();
+  const [tablets, setTablets] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const query = searchParams.get('query') || '';
+
+  const sortBy = (searchParams.get('sort') || 'age') as SortParams;
+  const preparedTablets = getPreparedProducts(tablets, { sortBy, query });
+  const tabletsQuantity = tablets.length;
+
+  useEffect(() => {
+    getPhones<Product>()
+      .then(setTablets)
+      .catch(() => setErrorMessage('Something went wrong...'))
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <section className="cart-page">
       <header className="phones-page__header">
@@ -13,16 +37,19 @@ export const TabletsPage = () => {
 
         <p className="phones-page__counter">{`${0} models`}</p>
       </header>
+
       <main>
-        <h2>Oops!</h2>
-        <p>There are currently no products on this page.</p>
-        <p>
-          Please consider returning to the
-          {' '}
-          <Link to="/" style={{ color: 'black' }}>homepage</Link>
-          {' '}
-          for more options.
-        </p>
+        {loading
+          ? (<MyLoader />)
+          : (
+            <>
+              {query && !preparedTablets.length
+                ? <p>There are no phones with such parameters</p>
+                : <ProductList products={preparedTablets} />}
+
+              {errorMessage && <h2>{errorMessage}</h2>}
+            </>
+          )}
       </main>
     </section>
   );

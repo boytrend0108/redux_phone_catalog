@@ -1,4 +1,4 @@
-@import "../../styles/utils/utils";
+@import '../../styles/utils/utils';
 
 .cart-item {
   display: flex;
@@ -51,6 +51,9 @@
   &__image-link {
     display: flex;
     align-items: center;
+    padding-inline: 12px;
+    box-sizing: border-box;
+    width: 80px;
 
     @include on-mobile-l {
       grid-column: 1/2;
