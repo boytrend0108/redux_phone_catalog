@@ -17,5 +17,5 @@ export function getHotPriceProducts(products: Product[]): Product[] {
     })
     .slice(0, 22);
 
-    return sorted;
+  return sorted;
 }

@@ -11,7 +11,7 @@ export interface PhonesState {
 const initialState: PhonesState = {
   loading: false,
   phones: [],
-  error:'',
+  error: '',
 };
 
 export const phonesInit = createAsyncThunk('phones/fetch', () => {
@@ -19,12 +19,13 @@ export const phonesInit = createAsyncThunk('phones/fetch', () => {
 })
 
 const phonesSlice = createSlice({
-  name: 'phones', 
+  name: 'phones',
   initialState,
   reducers: {},
-  
+
   extraReducers: builder => {
     builder.addCase(phonesInit.pending, state => {
+      state.error = '';
       state.loading = true;
     });
 
@@ -34,6 +35,7 @@ const phonesSlice = createSlice({
     })
 
     builder.addCase(phonesInit.rejected, state => {
+      debugger
       state.loading = false;
       state.error = 'Something went wrong...'
     })

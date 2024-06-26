@@ -1,6 +1,5 @@
-// const BASE_URL = 'https://mate-academy.github.io/react_phone-catalog/api';
 const BASE_URL
-  = 'https://mate-academy.github.io/react_phone-catalog';
+  = 'https://boytrend0108.github.io/redux_phone_catalog/api';
 
 function handleResponce(response: Response) {
   if (!response.ok) {
