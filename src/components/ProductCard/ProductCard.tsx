@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './ProductCard.scss';
@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { Product } from '../../types/product';
 import { AddToCart } from '../AddToCart';
 import { CartItemType } from '../../types/cart';
+import { useLoadImage } from '../../hooks/useLoadImage';
 
 type Props = {
   product: Product;
@@ -27,6 +28,10 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
     ram,
     category,
   } = product;
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  useLoadImage(imageRef, setIsImageLoaded);
 
   const cartItem: CartItemType = {
     id,
@@ -59,8 +64,11 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
         className="product-card__link"
         onClick={() => window.scrollTo(0, HEADER_HEIGHT)}
       >
-        <div className="product-card__imgbox">
+        <div className={classNames("product-card__imgbox", {
+          'product-card__sceleton': !isImageLoaded,
+        })}>
           <img
+            ref={imageRef}
             loading='lazy'
             src={`${images[0]}`}
             alt={name}

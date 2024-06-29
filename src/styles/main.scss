@@ -1,13 +1,23 @@
-@import "./utils/mixins";
-@import "./utils/extends";
-@import "./utils/variables";
-@import "./utils/normalize";
+@import './utils/mixins';
+@import './utils/extends';
+@import './utils/variables';
+@import './utils/normalize';
 
 .page {
+  --color-bg: #fff;
+  --color-page: #313237;
+
   font-family: $font-main;
   font-size: 14px;
   line-height: 21px;
   scroll-behavior: smooth;
+
+  &--dark {
+    --color-bg: #313237;
+    --color-page: #e2e6e9;
+
+    @include scroll-bar;
+  }
 
   @include scroll-bar;
 }
@@ -84,4 +94,4 @@ a {
 
 button {
   @extend %button;
- }
+}

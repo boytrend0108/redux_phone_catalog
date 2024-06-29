@@ -17,6 +17,21 @@
     width: 100%;
   }
 
+  &__sceleton {
+    opacity: 0.7;
+    animation: sceleton 1s linear infinite alternate;
+
+    @keyframes sceleton {
+      0% {
+        background-color: hsl(200, 20%, 70%);
+      }
+
+      100% {
+        background-color: hsl(200, 20%, 95%);
+      }
+    }
+  }
+
   &__imgbox {
     width: 100%;
     margin-bottom: 24px;

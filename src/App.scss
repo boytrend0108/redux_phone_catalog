@@ -1,28 +1,17 @@
 @import './styles/utils/utils';
 
 .app {
-  --color-bg: $color-white;
-  --color-page: $color-primary;
-
-
   min-height: 100vh;
   display: grid;
   grid-template-rows: 64px 1fr 96px;
   grid-template-areas:
-   'header'
-   'main'
-   'footer'
-  ;
+    'header'
+    'main'
+    'footer';
 
   background-color: var(--color-bg);
   color: var(--color-page);
 
-  transition:
-    background-color ease-in-out $transition-duration,
+  transition: background-color ease-in-out $transition-duration,
     color ease-in-out $transition-duration;
-
-  &--dark {
-    --color-bg: #313237;
-    --color-page: #E2E6E9;
-  }
 }
