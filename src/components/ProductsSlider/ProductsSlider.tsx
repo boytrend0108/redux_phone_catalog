@@ -1,4 +1,5 @@
 import React, {
+  memo,
   useCallback,
   useEffect,
   useRef,
@@ -20,7 +21,7 @@ const ITEM_MIN_WIGTH = 232;
 const MAX_ITEM_IN_SLIDER = 4;
 const WRAPPER_MIN_WIDTH = 232;
 
-export const ProductSlider: React.FC<Props> = (
+export const ProductSlider: React.FC<Props> = memo((
   { products, sliderName },
 ) => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -127,4 +128,4 @@ export const ProductSlider: React.FC<Props> = (
       </div>
     </div>
   );
-};
+});

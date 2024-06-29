@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import './AddToCart.scss';
 import { MyButton } from '../UI/MyButton';
@@ -11,7 +11,7 @@ type Props = {
   product: CartItemType;
 };
 
-export const AddToCart: React.FC<Props> = ({ product }) => {
+export const AddToCart: React.FC<Props> = memo(({ product }) => {
   const {
     id,
   } = product;
@@ -68,4 +68,4 @@ export const AddToCart: React.FC<Props> = ({ product }) => {
       </button>
     </div>
   );
-};
+});

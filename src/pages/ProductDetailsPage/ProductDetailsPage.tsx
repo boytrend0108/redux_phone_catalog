@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import './ProductDetailsPage.scss';
@@ -11,25 +11,22 @@ import { ProductSlider } from '../../components/ProductsSlider';
 import { MyBackLink } from '../../components/UI/MyBackLink';
 import { useAppDispatch } from '../../app/hooks';
 import { productAction } from '../../features/phones/phonesSlice';
+import { getSuggestedProducts } from './helpers';
 
-async function getSuggestedProducts() {
-  const products = await getAllProducts<Product[]>();
 
-  return products.filter(el => el.capacity.includes('512'));
-}
 
 export const ProductDetailsPage = () => {
-  const [product, setProduct]
-    = useState<Product>({} as Product);
-
+  const [product, setProduct] = useState<Product>({} as Product);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
-  const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
+  // const [suggestedProducts, setSuggestedProducts] = useState<Product[]>([]);
   const [errorSuggested, setErrorSuggested] = useState('');
-  const [products, setProducts] = useState<Product[]>([]);
   const { pathname } = useLocation();
   const { productId } = useParams();
   const dispatch = useAppDispatch();
+
+  const suggestedProducts = useRef<Product[]>([]);
 
   if (!product) {
     setErrorMessage('There is no data for this product...');
@@ -95,11 +92,14 @@ export const ProductDetailsPage = () => {
         }
       })
 
-    getSuggestedProducts()
-      .then(setSuggestedProducts)
-      .catch(() => setErrorSuggested('Something went wrong...'))
-      .finally(() => setLoading(false));
+    if (!suggestedProducts.current.length) {
+      getSuggestedProducts()
+        .then((res) => suggestedProducts.current = res)
+        .catch(() => setErrorSuggested('Something went wrong...'))
+        .finally(() => setLoading(false));
+    }
   }, [productId, products.length]);
+
 
   return (
     <div className="product-details">
@@ -109,6 +109,7 @@ export const ProductDetailsPage = () => {
         </div>
 
         <MyBackLink />
+
         <h1 className="product-details__title">
           {product?.name}
         </h1>
@@ -139,7 +140,7 @@ export const ProductDetailsPage = () => {
 
         {errorSuggested
           ? <p>{errorSuggested}</p>
-          : <ProductSlider products={suggestedProducts} />}
+          : <ProductSlider products={suggestedProducts.current} />}
       </footer>
     </div>
   );

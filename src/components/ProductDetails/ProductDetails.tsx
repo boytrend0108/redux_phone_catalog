@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 
 import './ProductDetails.scss';
 import { AddToCart } from '../AddToCart';
@@ -21,7 +21,7 @@ const PARAMS: (keyof ProductDescription)[] = [
   'cell',
 ];
 
-export const ProductDetails: React.FC<Props> = ({ product }) => {
+export const ProductDetails: React.FC<Props> = memo(({ product }) => {
   const {
     images = [],
     name,
@@ -35,34 +35,44 @@ export const ProductDetails: React.FC<Props> = ({ product }) => {
     capacity,
   } = product;
 
-  const cartItemData: CartItemType = {
-    id: product.id,
-    name,
-    images,
-    priceDiscount,
-    quantity: 1,
-    priceRegular: 0,
-    capacity,
-    ram,
-    category,
-  };
+  const cartItemData: CartItemType = useMemo(() => {
+    return {
+      id: product.id,
+      name,
+      images,
+      priceDiscount,
+      quantity: 1,
+      priceRegular: 0,
+      capacity,
+      ram,
+      category,
+    }
+
+  }, []);
 
   const [mainImage, setMainImage] = useState('');
+  const imageIndex = useRef(0);
+
+  function changeMainImage(preview: string, i: number) {
+    setMainImage(preview);
+    imageIndex.current = i;
+  }
+
 
   useEffect(() => {
-    setMainImage(images[0]);
+    setMainImage(images[imageIndex.current]);
   }, [images]);
 
   return (
     <section className="details">
       <div className="details__images">
         <div className="details__previews">
-          {images.map(preview => (
+          {images.map((preview, i) => (
             <button
               key={preview}
               className="details__preview-box"
               type="button"
-              onClick={() => setMainImage(preview)}
+              onClick={() => changeMainImage(preview, i)}
             >
               <img
                 src={`${preview}`}
@@ -146,4 +156,4 @@ export const ProductDetails: React.FC<Props> = ({ product }) => {
       </article>
     </section>
   );
-};
+});
