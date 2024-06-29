@@ -3,7 +3,7 @@
     "id": "apple-ipad-pro-11-2021-128gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-pro-11-2021",
-    "name": "Apple iPad Pro 11 (2021) 128GB Space Gray",
+    "name": "Apple iPad Pro 11 (2021) 128GB spacegray",
     "capacityAvailable": [
       "128GB",
       "256GB",
@@ -61,7 +61,7 @@
     "id": "apple-ipad-pro-11-2021-256gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-pro-11-2021",
-    "name": "Apple iPad Pro 11 (2021) 256GB Space Gray",
+    "name": "Apple iPad Pro 11 (2021) 256GB spacegray",
     "capacityAvailable": [
       "128GB",
       "256GB",
@@ -119,7 +119,7 @@
     "id": "apple-ipad-pro-11-2021-512gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-pro-11-2021",
-    "name": "Apple iPad Pro 11 (2021) 512GB Space Gray",
+    "name": "Apple iPad Pro 11 (2021) 512GB spacegray",
     "capacityAvailable": [
       "128GB",
       "256GB",
@@ -177,7 +177,7 @@
     "id": "apple-ipad-pro-11-2021-1tb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-pro-11-2021",
-    "name": "Apple iPad Pro 11 (2021) 1TB Space Gray",
+    "name": "Apple iPad Pro 11 (2021) 1TB spacegray",
     "capacityAvailable": [
       "128GB",
       "256GB",
@@ -235,7 +235,7 @@
     "id": "apple-ipad-pro-11-2021-2tb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-pro-11-2021",
-    "name": "Apple iPad Pro 11 (2021) 2TB Space Gray",
+    "name": "Apple iPad Pro 11 (2021) 2TB spacegray",
     "capacityAvailable": [
       "128GB",
       "256GB",
@@ -1047,7 +1047,7 @@
     "id": "apple-ipad-mini-6th-gen-64gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-mini-6th-gen",
-    "name": "Apple iPad Mini (6th Gen) 64GB Space Gray",
+    "name": "Apple iPad Mini (6th Gen) 64GB spacegray",
     "capacityAvailable": [
       "64GB",
       "256GB"
@@ -1103,7 +1103,7 @@
     "id": "apple-ipad-mini-6th-gen-256gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-mini-6th-gen",
-    "name": "Apple iPad Mini (6th Gen) 256GB Space Gray",
+    "name": "Apple iPad Mini (6th Gen) 256GB spacegray",
     "capacityAvailable": [
       "64GB",
       "256GB"
@@ -1611,7 +1611,7 @@
     "id": "apple-ipad-10-2-2020-128gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-10-2-2020",
-    "name": "Apple iPad 10.2 (2020) 128GB Space Gray",
+    "name": "Apple iPad 10.2 (2020) 128GB spacegray",
     "capacityAvailable": [
       "32GB",
       "128GB"
@@ -1668,7 +1668,7 @@
     "id": "apple-ipad-10-2-2020-32gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-10-2-2020",
-    "name": "Apple iPad 10.2 (2020) 32GB Space Gray",
+    "name": "Apple iPad 10.2 (2020) 32GB spacegray",
     "capacityAvailable": [
       "32GB",
       "128GB"
@@ -1835,7 +1835,7 @@
     "id": "apple-ipad-mini-5th-gen-64gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-mini-5th-gen",
-    "name": "Apple iPad Mini (5th Gen) 64GB Space Gray",
+    "name": "Apple iPad Mini (5th Gen) 64GB spacegray",
     "capacityAvailable": [
       "64GB",
       "256GB"
@@ -1890,7 +1890,7 @@
     "id": "apple-ipad-mini-5th-gen-256gb-spacegray",
     "category": "tablets",
     "namespaceId": "apple-ipad-mini-5th-gen",
-    "name": "Apple iPad Mini (5th Gen) 256GB Space Gray",
+    "name": "Apple iPad Mini (5th Gen) 256GB spacegray",
     "capacityAvailable": [
       "64GB",
       "256GB"
