@@ -3,7 +3,7 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import './ProductDetailsPage.scss';
 import { CategoryName, Product } from '../../types/product';
-import { getAccessories, getAllProducts, getPhones, getTablets } from '../../api/productApi';
+import { getAccessories, getPhones, getTablets } from '../../api/productApi';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { MyLoader } from '../../components/UI/MyLoader';
 import { ProductDetails } from '../../components/ProductDetails';

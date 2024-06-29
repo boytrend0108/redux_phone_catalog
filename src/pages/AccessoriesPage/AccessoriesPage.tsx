@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { BreadCrumbs } from '../../components/BreadCrumbs';
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/product';
