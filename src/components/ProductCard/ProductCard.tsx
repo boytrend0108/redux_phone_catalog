@@ -65,7 +65,7 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
         onClick={() => window.scrollTo(0, HEADER_HEIGHT)}
       >
         <div className={classNames("product-card__imgbox", {
-          'product-card__sceleton': !isImageLoaded,
+          'product-card__sceleton': isImageLoaded,
         })}>
           <img
             ref={imageRef}

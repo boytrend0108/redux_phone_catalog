@@ -11,6 +11,7 @@ function handleResponce(response: Response) {
 
 export const client = {
   async get<T>(url: string): Promise<T> {
+    console.log(BASE_URL)
     const response = await fetch(BASE_URL + url);
 
     return handleResponce(response);
