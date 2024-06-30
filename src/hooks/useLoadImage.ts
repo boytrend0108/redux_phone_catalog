@@ -11,6 +11,7 @@ export const useLoadImage = (
 
     const showImage = () => {
       setIsImageLoaded(true);
+      console.log(true)
     };
 
     if (imageRef.current?.complete) {

@@ -72,7 +72,9 @@ export const ProductCard: React.FC<Props> = ({ product, isNew = false }) => {
             loading='lazy'
             src={`${images[0]}`}
             alt={name}
-            className="product-card__img"
+            className={classNames("product-card__img", {
+              "product-card__img--loaded": isImageLoaded,
+            })}
             height={207}
             width={159}
           />

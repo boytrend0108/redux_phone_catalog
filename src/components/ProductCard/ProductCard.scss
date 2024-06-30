@@ -43,8 +43,13 @@
   &__img {
     max-height: 208px;
     min-height: 150px;
-    transition: transform ease-in-out $transition-duration;
+    opacity: 0;
+    transition: all ease-in-out $transition-duration;
     object-fit: cover;
+
+    &--loaded {
+      opacity: 1;
+    }
 
     &:hover {
       transform: scale(1.1);
